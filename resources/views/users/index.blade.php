@@ -36,7 +36,7 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->created_at }}</td>
                                     <td class="text-center">
-                                        <a href="">Editar</a>
+                                        <a href="{{ route('user.edit', $user->id) }}">Editar</a>
                                     </td>
 
                                 </tr>
