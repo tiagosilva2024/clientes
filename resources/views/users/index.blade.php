@@ -14,7 +14,7 @@
 
                 <div class="p-6 text-gray-900">
 
-                    <div class="p-3 bg-gray-100 rounded-lg mb-4">
+                    <div class="p-2 bg-gray-100 rounded-lg mb-4">
                         {{ $users->Links() }}
                     </div>
 
@@ -25,20 +25,29 @@
                                 <th class="p-4">Nome</th>
                                 <th>E-mail</th>
                                 <th>Data de cadastro</th>
+
+                                @can('level')
                                 <th class="text-center">Ações</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
                                 <tr class="hover:bg-gray-100">
-                                    <td class="text-center">ícone</td>
+                                    <td class="text-center">
+                                        @if($user->level == 'admin')
+                                            <i class="fas fa-user-tie"></i>
+                                        @endif
+                                    </td>
                                     <td class="p-2">{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->created_at }}</td>
+
+                                    @can('level')
                                     <td class="text-center">
                                         <a href="{{ route('user.edit', $user->id) }}">Editar</a>
                                     </td>
-
+                                    @endcan
                                 </tr>
                             @endforeach
                         </tbody>

@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware( middleware: 'can:level')->only( methods: 'edit');
+    }
+
     public function index() {
         return view('users.index', [
             'users' => DB::table('users')->orderBy('name')->paginate('5')
@@ -20,8 +25,9 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $id){
-        return 'update';
-    }
+    public function update(Request $id) {
+        User::findOrFail($id->id)->update($id->all());
+        return redirect()->route( route:'user.index');
+       }
 
 }
