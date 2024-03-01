@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'nome',
+        'email',
+        'telefone',
+        'empresa',
+        'tel_comercial',
+    ];
+
+    public function user() {
+        return $this->belongTo(User::class);
+    }
 }
