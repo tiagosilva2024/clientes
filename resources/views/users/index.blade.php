@@ -20,10 +20,10 @@
                 <table class="table-auto w-full">
                     <thead class="text-left bg-gray-100">
                         <tr>
-                            <th class="p-2 text-center">Nível</th>
-                            <th class="p-4">Nome</th>
-                            <th class="p-4">E-mail</th>
-                            <th class="p-4">Data de cadastro</th>
+                            <th class=" text-center">Nível</th>
+                            <th class="">Nome</th>
+                            <th class="p-2">E-mail</th>
+                            <th class="p-2">Data de cadastro</th>
 
                             @can('level')
                             <th class="text-center">Ações</th>
@@ -38,13 +38,13 @@
                                         <i class="fas fa-user-tie"></i>
                                     @endif
                                 </td>
-                                <td class="p-2">{{ $user->name }}</td>
+                                <td class="">{{ $user->name }}</td>
                                 <td class="p-2">{{ $user->email }}</td>
                                 <td class="p-2 text-sm">{{ $user->created_at }}</td>
 
                                 @can('level')
                                 <td class="p-2 text-center">
-                                    <a href="{{ route('user.edit', $user->id) }}">Editar</a>
+                                    <a href="{{ route('user.edit', $user->id) }}" class="hover:text-blue-500">Editar</a>
                                 </td>
                                 @endcan
                             </tr>

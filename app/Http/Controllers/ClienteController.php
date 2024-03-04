@@ -29,6 +29,16 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $cliente = new Cliente();
+        $cliente->user_id       = $request->user_id;
+        $cliente->nome          = $request->nome;
+        $cliente->email         = $request->email;
+        $cliente->telefone      = $request->telefone;
+        $cliente->empresa       = $request->empresa;
+        $cliente->tel_comercial = $request->tel_comercial;
+
+        $cliente->save();
+        return redirect()->route('cliente.create')->with('msg','Cliente cadastrado com sucesso!');
+
     }
 
     /**

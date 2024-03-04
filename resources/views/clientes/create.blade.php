@@ -10,8 +10,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <p class="mb-4">Olá <strong>{{ Auth::user()->name }}</strong></p>
-
-                    <form action="{{ route('cliente.store')}}" method="post"></form>
+                    
+                    @if(session('msg'))
+                    <p class="bg-gray-500 p-2 rounded text-center text-white mb-4">{{ session('msg') }}</p>
+                    @endif
+                                    
+                    <form action="{{ route('cliente.store') }}" method="post">
                         @csrf
 
                         <fieldset class="border-2 rounded p-6">
@@ -50,7 +54,8 @@
                                 
                             </div>
 
-                        </fieldset>   
+                        </fieldset>
+                    </form>   
                 </div>
             </div>
         </div>

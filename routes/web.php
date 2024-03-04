@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/users-edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/edit-update/{id}', [UserController::class, 'update'])->name('user.update');
 
-    // clientes
+    // Clientes
     Route::resources([
         'cliente' => ClienteController::class
     ]);
