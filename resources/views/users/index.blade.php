@@ -20,8 +20,8 @@
                 <table class="table-auto w-full">
                     <thead class="text-left bg-gray-100">
                         <tr>
-                            <th class=" text-center">Nível</th>
-                            <th class="">Nome</th>
+                            <th class="text-center">Nível</th>
+                            <th class="p-2">Nome</th>
                             <th class="p-2">E-mail</th>
                             <th class="p-2">Data de cadastro</th>
 
@@ -38,7 +38,7 @@
                                         <i class="fas fa-user-tie"></i>
                                     @endif
                                 </td>
-                                <td class="">{{ $user->name }}</td>
+                                <td class="p-2">{{ $user->name }}</td>
                                 <td class="p-2">{{ $user->email }}</td>
                                 <td class="p-2 text-sm">{{ $user->created_at }}</td>
 

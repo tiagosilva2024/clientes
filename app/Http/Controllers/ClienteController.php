@@ -3,16 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('can:level')->only('index');
+    }
+
     /**
      * Display a listing of the resource.
      */
+    
+    public function meus_clientes(User $id)
+    {
+        $user = User::where('id', $id->id)->first();
+        $clientes = $user->customers()->get();
+
+        return view('clientes.meus_clientes',[
+            'clientes' => $clientes
+        ]);
+    }
+    
     public function index()
     {
-        //
+        return view('clientes.index',[
+            'clientes' => Cliente::orderBy('nome')->paginate('5')
+        ]);
     }
 
     /**
@@ -46,7 +67,7 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        Return view('clientes.show',['cliente' => $cliente]);
     }
 
     /**
@@ -54,7 +75,7 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        return view('clientes.edit', ['cliente' => $cliente]);
     }
 
     /**
@@ -62,7 +83,8 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        Cliente::findOrFail($cliente->id)->update($request->all());
+        return redirect()->route('cliente.show', $cliente->id);
     }
 
     /**
@@ -70,6 +92,12 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
+        Cliente::findOrFail($cliente->id)->delete();
+        return redirect()->route('meus.clientes', Auth::user()->id);        
     }
+
+    public function confirma_delete(Cliente $id)
+    {
+        return view('clientes.confirma_delete', ['id'=> $id]);
+    } 
 }

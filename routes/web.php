@@ -3,6 +3,8 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\Cliente;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +23,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', [
+        'clientes' => Cliente::all(),
+        'users' => User::all()
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -38,6 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::resources([
         'cliente' => ClienteController::class
     ]);
+
+    // Meus clientes
+    Route::get('/meus-clientes/{id}', [ClienteController::class, 'meus_clientes'])->name('meus.clientes');
+    Route::get('/confirma_delete/{id}', [ClienteController::class, 'confirma_delete'])->name('confirma.delete');
 
 });
 
